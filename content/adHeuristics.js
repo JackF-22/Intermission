@@ -5,9 +5,9 @@
 // via debugLog (enable "debug" in the popup) so selectors/weights can be
 // tuned against what you actually see during a real ad break.
 //
-// Call window.AdMuteHeuristics.start(siteKey, config) from a per-site file.
+// Call window.IntermissionHeuristics.start(siteKey, config) from a per-site file.
 (function () {
-  const { reportAdState, debugLog, isSiteEnabled } = window.AdMuteCommon;
+  const { reportAdState, debugLog, isSiteEnabled } = window.IntermissionCommon;
 
   function elementIsVisible(el) {
     if (!el) return false;
@@ -110,5 +110,5 @@
     evaluate();
   }
 
-  window.AdMuteHeuristics = { start };
+  window.IntermissionHeuristics = { start };
 })();

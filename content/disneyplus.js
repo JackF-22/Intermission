@@ -2,7 +2,7 @@
 // Disney+'s player is minified and I have no way to inspect a live ad
 // break from here. Enable "debug" in the popup to calibrate.
 (function () {
-  window.AdMuteHeuristics.start("disneyplus", {
+  window.IntermissionHeuristics.start("disneyplus", {
     selectors: [
       '[data-testid*="ad-timer"]',
       '[data-testid*="ad-banner"]',

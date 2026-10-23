@@ -2,7 +2,7 @@
 // "debug" in the popup and watch the console during a real ad break to
 // calibrate against what Peacock actually renders.
 (function () {
-  window.AdMuteHeuristics.start("peacock", {
+  window.IntermissionHeuristics.start("peacock", {
     selectors: [
       '[data-testid*="ad-indicator"]',
       '[data-testid*="ad-countdown"]',

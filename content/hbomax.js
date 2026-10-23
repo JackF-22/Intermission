@@ -2,7 +2,7 @@
 // Max/HBO Max's player. Enable "debug" in the popup and watch the console
 // during a real ad break to calibrate.
 (function () {
-  window.AdMuteHeuristics.start("hbomax", {
+  window.IntermissionHeuristics.start("hbomax", {
     selectors: [
       '[data-testid*="ad-marker"]',
       '[data-testid*="ad-indicator"]',

@@ -5,7 +5,7 @@
 // still catch the ad. Turn on "debug" in the popup and watch the console the
 // next time an ad plays to see which signals actually fire, then adjust.
 (function () {
-  window.AdMuteHeuristics.start("hulu", {
+  window.IntermissionHeuristics.start("hulu", {
     selectors: [
       '[data-automationid="ad-overlay"]',
       '[data-testid*="ad-countdown"]',

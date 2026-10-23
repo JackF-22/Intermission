@@ -18,7 +18,7 @@
 
   function debugLog(...args) {
     chrome.storage.local.get(["debug"], ({ debug }) => {
-      if (debug) console.log(`[AdMute:${SITE}]`, ...args);
+      if (debug) console.log(`[Intermission:${SITE}]`, ...args);
     });
   }
 
@@ -29,5 +29,5 @@
     });
   }
 
-  window.AdMuteCommon = { reportAdState, debugLog, isSiteEnabled, SITE };
+  window.IntermissionCommon = { reportAdState, debugLog, isSiteEnabled, SITE };
 })();

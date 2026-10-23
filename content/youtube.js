@@ -2,7 +2,7 @@
 // detector is precise and doesn't need the heuristic scoring used for the
 // other platforms.
 (function () {
-  const { reportAdState, debugLog, isSiteEnabled } = window.AdMuteCommon;
+  const { reportAdState, debugLog, isSiteEnabled } = window.IntermissionCommon;
   const SITE_KEY = "youtube";
 
   let lastState = null;

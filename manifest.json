@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Ad Mute for Streaming",
+  "name": "Intermission",
   "version": "0.1.0",
-  "description": "Mutes the tab when a streaming show switches to an ad break, then unmutes when the show resumes.",
+  "description": "Mutes the tab when a streaming show cuts to an ad break, then unmutes when the show resumes.",
   "homepage_url": "https://github.com/JackF-22/ad-mute-extension",
   "permissions": ["tabs", "storage", "commands"],
   "host_permissions": [
@@ -24,7 +24,7 @@
   },
   "action": {
     "default_popup": "popup/popup.html",
-    "default_title": "Ad Mute",
+    "default_title": "Intermission",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png",
