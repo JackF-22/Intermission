@@ -1,0 +1,68 @@
+{
+  "manifest_version": 3,
+  "name": "Ad Mute for Streaming",
+  "version": "0.1.0",
+  "description": "Mutes the tab when a streaming show switches to an ad break, then unmutes when the show resumes.",
+  "homepage_url": "https://github.com/JackF-22/ad-mute-extension",
+  "permissions": ["tabs", "storage", "commands"],
+  "host_permissions": [
+    "*://*.youtube.com/*",
+    "*://*.hulu.com/*",
+    "*://*.disneyplus.com/*",
+    "*://*.peacocktv.com/*",
+    "*://*.max.com/*",
+    "*://*.hbomax.com/*"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Ad Mute",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "commands": {
+    "toggle-mute": {
+      "suggested_key": { "default": "Ctrl+Shift+M", "mac": "Command+Shift+M" },
+      "description": "Manually toggle mute on the active tab"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content/common.js", "content/youtube.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://*.hulu.com/*"],
+      "js": ["content/common.js", "content/adHeuristics.js", "content/hulu.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://*.disneyplus.com/*"],
+      "js": ["content/common.js", "content/adHeuristics.js", "content/disneyplus.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://*.peacocktv.com/*"],
+      "js": ["content/common.js", "content/adHeuristics.js", "content/peacock.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://*.max.com/*", "*://*.hbomax.com/*"],
+      "js": ["content/common.js", "content/adHeuristics.js", "content/hbomax.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

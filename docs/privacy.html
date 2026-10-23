@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ad Mute for Streaming — Privacy Policy</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 700px;
+      margin: 48px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      color: #1a1a1a;
+      background: #fff;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { color: #e8e8e8; background: #15151a; }
+      a { color: #8ab4ff; }
+      code { background: #2a2a32; }
+    }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.1rem; margin-top: 2em; }
+    code {
+      background: #f0f0f0;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .updated { color: #777; font-size: 0.9em; }
+    ul { padding-left: 1.3em; }
+  </style>
+</head>
+<body>
+  <h1>Ad Mute for Streaming — Privacy Policy</h1>
+  <p class="updated">Last updated: 2026-10-23</p>
+
+  <p>
+    Ad Mute for Streaming is a browser extension that mutes the current browser
+    tab when it detects an ad break on a supported streaming site, and unmutes
+    it when the show resumes.
+  </p>
+
+  <h2>Data collection</h2>
+  <p>
+    This extension does not collect, transmit, sell, or share any personal
+    data, browsing history, or video-watching activity. It has no analytics,
+    no third-party trackers, and no remote servers of any kind. Everything it
+    does happens locally in your browser.
+  </p>
+
+  <h2>What it stores, and where</h2>
+  <p>
+    The extension keeps a small amount of state in your browser's local
+    extension storage (<code>chrome.storage.local</code>), which never leaves
+    your device:
+  </p>
+  <ul>
+    <li>Which sites you've enabled/disabled the extension for</li>
+    <li>Whether debug logging is turned on</li>
+    <li>A short rolling log (last ~50 entries) of recent mute/unmute events, used only to show you activity in the extension's popup</li>
+  </ul>
+  <p>
+    None of this is synced to an account, sent to a server, or accessible to
+    anyone but you.
+  </p>
+
+  <h2>Why it needs the permissions it asks for</h2>
+  <ul>
+    <li><code>tabs</code> — to mute/unmute the specific browser tab playing the show, and to detect manual mute toggles.</li>
+    <li><code>storage</code> — to save your on/off settings and the local activity log described above.</li>
+    <li><code>commands</code> — to support the optional manual mute keyboard shortcut.</li>
+    <li>
+      Host permissions on YouTube, Hulu, Disney+, Peacock, and Max/HBO Max — the
+      extension needs to run a small script on these pages to look at the
+      player's on-page state (CSS classes, visible text like "Ad 1 of 3", ad
+      player elements) so it can tell an ad break from regular content. It
+      does not read, store, or transmit anything else from these pages — no
+      account info, no viewing history, no personal data.
+    </li>
+  </ul>
+
+  <h2>Open source</h2>
+  <p>
+    The full source code is public and can be inspected at
+    <a href="https://github.com/JackF-22/ad-mute-extension">github.com/JackF-22/ad-mute-extension</a>.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions or issues: please open an issue at
+    <a href="https://github.com/JackF-22/ad-mute-extension/issues">github.com/JackF-22/ad-mute-extension/issues</a>.
+  </p>
+</body>
+</html>

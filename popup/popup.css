@@ -1,0 +1,56 @@
+body {
+  font-family: -apple-system, system-ui, sans-serif;
+  width: 300px;
+  padding: 12px;
+  font-size: 13px;
+}
+
+h1 {
+  font-size: 15px;
+  margin: 0 0 10px;
+}
+
+h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #666;
+  margin: 12px 0 4px;
+}
+
+section {
+  margin-top: 8px;
+}
+
+label {
+  display: block;
+  margin: 2px 0;
+}
+
+#manualToggle {
+  width: 100%;
+  padding: 6px;
+  cursor: pointer;
+}
+
+#log {
+  max-height: 160px;
+  overflow-y: auto;
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 6px;
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+}
+
+.log-entry {
+  margin-bottom: 4px;
+}
+
+.log-entry.ad-on {
+  color: #b00020;
+}
+
+.log-entry.ad-off {
+  color: #0a7a2a;
+}
