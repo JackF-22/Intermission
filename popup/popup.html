@@ -6,30 +6,79 @@
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <h1>Intermission</h1>
+    <header class="brand">
+      <img class="brand-mark" src="../icons/icon32.png" alt="" width="20" height="20" />
+      <span class="brand-name">Intermission</span>
+    </header>
 
-    <button id="manualToggle">Toggle mute on this tab</button>
+    <div id="statusChip" class="status status--unknown">
+      <span class="status-dot" aria-hidden="true"></span>
+      <div class="status-text">
+        <span class="status-headline" id="statusHeadline">Checking this tab…</span>
+        <span class="status-sub" id="statusSub"></span>
+      </div>
+    </div>
 
-    <section>
-      <h2>Sites</h2>
-      <label><input type="checkbox" data-site="youtube" /> YouTube</label>
-      <label><input type="checkbox" data-site="hulu" /> Hulu</label>
-      <label><input type="checkbox" data-site="disneyplus" /> Disney+</label>
-      <label><input type="checkbox" data-site="peacock" /> Peacock</label>
-      <label><input type="checkbox" data-site="hbomax" /> Max / HBO Max</label>
+    <button id="manualToggle" class="btn-outline">Mute this tab</button>
+
+    <section class="sites">
+      <h2 class="section-label">Sites</h2>
+
+      <label class="site-row">
+        <span>YouTube</span>
+        <span class="switch">
+          <input type="checkbox" data-site="youtube" />
+          <span class="switch-track"><span class="switch-thumb"></span></span>
+        </span>
+      </label>
+
+      <label class="site-row">
+        <span>Hulu</span>
+        <span class="switch">
+          <input type="checkbox" data-site="hulu" />
+          <span class="switch-track"><span class="switch-thumb"></span></span>
+        </span>
+      </label>
+
+      <label class="site-row">
+        <span>Disney+</span>
+        <span class="switch">
+          <input type="checkbox" data-site="disneyplus" />
+          <span class="switch-track"><span class="switch-thumb"></span></span>
+        </span>
+      </label>
+
+      <label class="site-row">
+        <span>Peacock</span>
+        <span class="switch">
+          <input type="checkbox" data-site="peacock" />
+          <span class="switch-track"><span class="switch-thumb"></span></span>
+        </span>
+      </label>
+
+      <label class="site-row">
+        <span>Max / HBO Max</span>
+        <span class="switch">
+          <input type="checkbox" data-site="hbomax" />
+          <span class="switch-track"><span class="switch-thumb"></span></span>
+        </span>
+      </label>
     </section>
 
-    <section>
-      <label
-        ><input type="checkbox" id="debugToggle" /> Debug logging (console +
-        log below)</label
-      >
-    </section>
+    <details class="advanced">
+      <summary>Advanced</summary>
 
-    <section>
-      <h2>Recent activity</h2>
-      <div id="log"></div>
-    </section>
+      <label class="site-row debug-row">
+        <span>Debug logging</span>
+        <span class="switch">
+          <input type="checkbox" id="debugToggle" />
+          <span class="switch-track"><span class="switch-thumb"></span></span>
+        </span>
+      </label>
+
+      <h2 class="section-label">Recent activity</h2>
+      <div id="log" class="log"></div>
+    </details>
 
     <script src="popup.js"></script>
   </body>
