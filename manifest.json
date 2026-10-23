@@ -3,7 +3,7 @@
   "name": "Intermission",
   "version": "0.1.0",
   "description": "Mutes the tab when a streaming show cuts to an ad break, then unmutes when the show resumes.",
-  "homepage_url": "https://github.com/JackF-22/ad-mute-extension",
+  "homepage_url": "https://github.com/JackF-22/Intermission",
   "permissions": ["tabs", "storage", "commands"],
   "host_permissions": [
     "*://*.youtube.com/*",
