@@ -27,6 +27,7 @@
 
     let lastState = false;
     let consecutiveOff = 0;
+    let hasReportedInitialState = false;
 
     function scoreOnce() {
       let score = 0;
@@ -82,6 +83,16 @@
       isSiteEnabled(siteKey, (enabled) => {
         if (!enabled) return;
         const score = scoreOnce();
+
+        if (!hasReportedInitialState) {
+          // Always send one report right away so the popup/background know
+          // this tab is on a supported site, even if no ad is playing yet.
+          hasReportedInitialState = true;
+          lastState = score >= onThreshold;
+          debugLog("initial state", { score, isAd: lastState });
+          reportAdState(lastState, { score, initial: true });
+          return;
+        }
 
         if (!lastState && score >= onThreshold) {
           lastState = true;
