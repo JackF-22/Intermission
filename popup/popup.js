@@ -1,5 +1,6 @@
 const siteCheckboxes = document.querySelectorAll("[data-site]");
 const debugToggle = document.getElementById("debugToggle");
+const autoSkipToggle = document.getElementById("autoSkipToggle");
 const manualToggle = document.getElementById("manualToggle");
 const logEl = document.getElementById("log");
 const statusChip = document.getElementById("statusChip");
@@ -56,13 +57,14 @@ function loadActiveTabAndStatus() {
 }
 
 function loadSettings() {
-  chrome.storage.local.get(["enabledSites", "debug", "adMuteLog"], (data) => {
+  chrome.storage.local.get(["enabledSites", "debug", "autoSkipYoutube", "adMuteLog"], (data) => {
     const enabledSites = data.enabledSites || {};
     siteCheckboxes.forEach((cb) => {
       const site = cb.dataset.site;
       cb.checked = enabledSites[site] !== false;
     });
     debugToggle.checked = !!data.debug;
+    autoSkipToggle.checked = data.autoSkipYoutube !== false;
     renderLog(data.adMuteLog || []);
   });
 }
@@ -102,12 +104,40 @@ debugToggle.addEventListener("change", () => {
   chrome.storage.local.set({ debug: debugToggle.checked });
 });
 
+autoSkipToggle.addEventListener("change", () => {
+  chrome.storage.local.set({ autoSkipYoutube: autoSkipToggle.checked });
+});
+
+document.getElementById("diagButton").addEventListener("click", (event) => {
+  const button = event.currentTarget;
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const tab = tabs[0];
+    if (!tab) return;
+    chrome.storage.local.remove("diagnostic", () => {
+      // Delivered to every frame in the tab; each replies via the background.
+      chrome.tabs.sendMessage(tab.id, { type: "DIAGNOSE" }, () => void chrome.runtime.lastError);
+      setTimeout(() => {
+        chrome.storage.local.get(["diagnostic"], async ({ diagnostic }) => {
+          const text = JSON.stringify(diagnostic || "no content script responded", null, 1);
+          try {
+            await navigator.clipboard.writeText(text);
+            button.textContent = "Copied to clipboard";
+          } catch (e) {
+            button.textContent = "Copy failed";
+          }
+        });
+      }, 900);
+    });
+  });
+});
+
 manualToggle.addEventListener("click", () => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tab = tabs[0];
     if (!tab) return;
     const nextMuted = !tab.mutedInfo?.muted;
-    chrome.tabs.update(tab.id, { muted: nextMuted }, () => {
+    chrome.runtime.sendMessage({ type: "MANUAL_MUTE", tabId: tab.id, muted: nextMuted }, () => {
+      void chrome.runtime.lastError;
       renderManualButton({ mutedInfo: { muted: nextMuted } });
     });
   });

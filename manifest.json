@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Intermission",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Mutes the tab when a streaming show cuts to an ad break, then unmutes when the show resumes.",
   "homepage_url": "https://github.com/JackF-22/Intermission",
-  "permissions": ["tabs", "storage", "commands"],
+  "permissions": ["tabs", "storage", "commands", "debugger"],
   "host_permissions": [
     "*://*.youtube.com/*",
     "*://*.hulu.com/*",
@@ -47,21 +47,25 @@
     {
       "matches": ["*://*.hulu.com/*"],
       "js": ["content/common.js", "content/adHeuristics.js", "content/hulu.js"],
+      "all_frames": true,
       "run_at": "document_idle"
     },
     {
       "matches": ["*://*.disneyplus.com/*"],
       "js": ["content/common.js", "content/adHeuristics.js", "content/disneyplus.js"],
+      "all_frames": true,
       "run_at": "document_idle"
     },
     {
       "matches": ["*://*.peacocktv.com/*"],
       "js": ["content/common.js", "content/adHeuristics.js", "content/peacock.js"],
+      "all_frames": true,
       "run_at": "document_idle"
     },
     {
       "matches": ["*://*.max.com/*", "*://*.hbomax.com/*"],
       "js": ["content/common.js", "content/adHeuristics.js", "content/hbomax.js"],
+      "all_frames": true,
       "run_at": "document_idle"
     }
   ]

@@ -1,29 +1,32 @@
-// Hulu's player markup is obfuscated/minified and changes over time, so these
-// selectors are best-effort guesses, not verified against a live ad break.
-// The text-pattern and iframe-hint signals are more durable than the
-// selectors below — if the selectors stop matching, those two will usually
-// still catch the ad. Turn on "debug" in the popup and watch the console the
-// next time an ad plays to see which signals actually fire, then adjust.
+// Hulu: site-specific signals only. The shared text patterns and class/test-id
+// token detection live in adHeuristics.js.
+//
+// Calibrated against a diagnostic copied during a real ad break:
+//  - the timeline playhead gets the "--ad" modifier only while an ad plays;
+//  - the ad label ("Ad") and countdown ("1:57") are visible text;
+//  - the home page stays in the DOM under the player, including a promo tile
+//    labelled "ADVERTISEMENT", and the timeline always renders markers for
+//    upcoming ad breaks. Both must be excluded or the tab never unmutes.
 (function () {
   window.IntermissionHeuristics.start("hulu", {
     selectors: [
+      ".Timeline__playhead--ad",
+      // From a diagnostic during a real ad: "Ad", the countdown and the
+      // "visit advertiser's site" link live in this bar.
+      ".AdUnitView__adBar",
+      ".AdPlayer:not(.AdPlayer--hidden)",
       '[data-automationid="ad-overlay"]',
-      '[data-testid*="ad-countdown"]',
-      '[data-testid*="ad-indicator"]',
-      ".ad-overlay",
     ],
-    textPatterns: [
-      /^ad$/i,
-      /^advertisement$/i,
-      /^ad \d+ of \d+$/i,
-      /your (program|show) will resume/i,
+    excludeSelectors: [
+      '[data-testid="level-one-content"]',
+      '[data-testid="hub-collections-home"]',
+      '[data-testid="global-navigation"]',
+      '[data-testid^="footer"]',
+      '[data-testid^="collection-"]',
+      '[data-testid*="tile"]',
+      ".TimelineAdBreaks",
+      '[data-testid="adBreak"]',
     ],
-    iframeHints: [
-      "doubleclick.net",
-      "imasdk.googleapis.com",
-      "adsafeprotected.com",
-      "moatads.com",
-      "fwmrm.net",
-    ],
+    iframeHints: ["doubleclick.net", "imasdk.googleapis.com", "fwmrm.net"],
   });
 })();

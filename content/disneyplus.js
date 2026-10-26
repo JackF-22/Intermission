@@ -1,24 +1,10 @@
-// Same caveat as hulu.js: selectors are unverified best guesses since
-// Disney+'s player is minified and I have no way to inspect a live ad
-// break from here. Enable "debug" in the popup to calibrate.
+// Disney+: site-specific signals only. The shared text patterns and class/test-id
+// token detection live in adHeuristics.js. Selectors here are best-effort
+// guesses (the player markup is minified and changes); turn on "debug" in the
+// popup and watch the console during a real ad break to see which signals fire.
 (function () {
   window.IntermissionHeuristics.start("disneyplus", {
-    selectors: [
-      '[data-testid*="ad-timer"]',
-      '[data-testid*="ad-banner"]',
-      '[data-testid*="ad-indicator"]',
-    ],
-    textPatterns: [
-      /^ad$/i,
-      /^advertisement$/i,
-      /^ad \d+ of \d+$/i,
-      /your (program|show) will resume/i,
-    ],
-    iframeHints: [
-      "doubleclick.net",
-      "imasdk.googleapis.com",
-      "adsafeprotected.com",
-      "moatads.com",
-    ],
+    selectors: ['[data-testid^="ad-"]', '[data-testid$="-ad"]'],
+    iframeHints: ["doubleclick.net", "imasdk.googleapis.com"],
   });
 })();
