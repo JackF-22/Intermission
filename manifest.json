@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Intermission",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Mutes the tab when a streaming show cuts to an ad break, then unmutes when the show resumes.",
   "homepage_url": "https://github.com/JackF-22/Intermission",
   "permissions": ["tabs", "storage", "commands"],

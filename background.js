@@ -83,9 +83,26 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 chrome.tabs.onRemoved.addListener((tabId) => clearTabState(tabId));
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
-  // A fresh navigation invalidates whatever ad state we knew about this tab.
+  // Streaming SPAs (Peacock, Disney+, etc.) rewrite the URL via the History
+  // API on almost every click/overlay without actually reloading the page,
+  // which still fires this listener with status "loading". The content
+  // script is still alive in that case and won't re-report until the next
+  // real ad-state transition, so wiping the state here would leave the
+  // popup stuck on "Not on a supported site" until that happens. Only clear
+  // when the hostname itself changed, which is the real signal that the
+  // page (and its content script) actually reloaded.
   if (changeInfo.status === "loading" && changeInfo.url) {
-    clearTabState(tabId);
+    chrome.storage.session.get(["tabState"], ({ tabState }) => {
+      const current = tabState && tabState[tabId];
+      if (!current) return;
+      let newHost;
+      try {
+        newHost = new URL(changeInfo.url).hostname;
+      } catch (e) {
+        return;
+      }
+      if (newHost !== current.site) clearTabState(tabId);
+    });
   }
 });
 
